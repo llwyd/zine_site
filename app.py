@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request, redirect, url_for, make_response
+from flask import Flask, render_template, flash, request, redirect, url_for, make_response, abort
 from PIL import Image, ImageCms
 from werkzeug.utils import secure_filename
 import uuid
@@ -7,9 +7,9 @@ from pathlib import Path
 
 app = Flask(__name__)
 
-app.config['CLIENT_ID'] = ''
-app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
+app.config['UPLOAD_EXT'] = ['.jpg', '.png', '.jpeg']
 app.config['UPLOAD_PATH'] = 'uploads'
+app.config['MAX_SIZE'] = 1024 * 1024
 
 @app.route('/')
 def main_page():
@@ -39,7 +39,10 @@ def upload_image():
     if filename != '':
         file_ext = Path(filename).suffix
         print(file_ext)
-        uploaded_file.save(app.config['UPLOAD_PATH'] + '/' + client_id + str('_s') + file_ext)
+        if file_ext not in app.config['UPLOAD_EXT']:
+            abort(400)
+        fpn = app.config['UPLOAD_PATH'] + '/' + client_id
+        uploaded_file.save( fpn + str('_s') + file_ext)
 
     return redirect(url_for('main_page'))
 
