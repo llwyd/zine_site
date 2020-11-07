@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request, redirect, url_for, make_response, abort
+from flask import Flask, render_template, flash, request, redirect, url_for, make_response, abort, send_from_directory 
 from PIL import Image, ImageCms
 from werkzeug.utils import secure_filename
 import uuid
@@ -45,6 +45,10 @@ def upload_image():
         uploaded_file.save( fpn + str('_s') + file_ext)
 
     return redirect(url_for('main_page'))
+
+@app.route('/uploads/<clientid>')
+def get_image_s(clientid):
+    return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_s.jpg'))
 
 @app.route('/assert')
 def critical_failure():
