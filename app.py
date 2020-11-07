@@ -46,8 +46,9 @@ def upload_image():
 
     return redirect(url_for('main_page'))
 
-@app.route('/uploads/<clientid>')
-def get_image_s(clientid):
+@app.route('/uploads/<clientid>/<layer>')
+def get_image_s(clientid,layer):
+    print(layer)
     return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_s.jpg'))
 
 @app.route('/assert')
