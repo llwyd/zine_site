@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request, redirect, url_for, make_response, abort, send_from_directory 
+from flask import Flask, render_template, flash, request, redirect, url_for, make_response, abort, send_from_directory
 from PIL import Image, ImageCms
 from werkzeug.utils import secure_filename
 import uuid
@@ -9,8 +9,10 @@ import version
 
 app = Flask(__name__)
 
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+
 app.config['UPLOAD_EXT'] = ['.jpg', '.png', '.jpeg']
-app.config['UPLOAD_PATH'] = 'uploads'
+app.config['UPLOAD_PATH'] = os.path.join(THIS_FOLDER, 'uploads')
 app.config['MAX_SIZE'] = 1024 * 1024
 
 @app.route('/')
@@ -35,7 +37,7 @@ def upload_image():
         # should never reach here
         return redirect(url_for('critical_failure'))
     print(client_id)
-    
+
     # Process incoming file
     uploaded_file = request.files['file']
     filename = secure_filename(uploaded_file.filename)

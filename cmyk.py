@@ -1,13 +1,17 @@
+import os
 from PIL import Image, ImageCms
 
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+ICC_PATH = os.path.join(THIS_FOLDER, 'icc')
+
 def Extract( folder, client_id, ext):
-    
+
     fp = folder + '/' + client_id
     img = Image.open( fp + "_s" + ext)
 
     # Available via https://www.adobe.com/support/downloads/iccprofiles/iccprofiles_win.html
-    rgb_icc = "icc/AppleRGB.icc"
-    cmyk_icc = "icc/USWebCoatedSWOP.icc"
+    rgb_icc = os.path.join(ICC_PATH, 'AppleRGB.icc')
+    cmyk_icc = os.path.join(ICC_PATH, 'USWebCoatedSWOP.icc')
 
     im = ImageCms.profileToProfile(img, rgb_icc, cmyk_icc, renderingIntent=0, outputMode='CMYK')
     source = im.split()
