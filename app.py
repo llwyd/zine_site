@@ -57,15 +57,15 @@ def upload_image():
 def get_image_s(clientid,layer):
     print(layer)
     if layer is 'C':
-        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_c.jpg'))
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_c.png'))
     elif layer is 'M':
-        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_m.jpg'))
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_m.png'))
     elif layer is 'Y':
-        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_y.jpg'))
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_y.png'))
     elif layer is 'K':
-        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_k.jpg'))
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_k.png'))
     else:
-        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_s.jpg'))
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_s.png'))
 
 @app.route('/assert')
 def critical_failure():
