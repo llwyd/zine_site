@@ -14,7 +14,10 @@
         </head>
 	<body>
 		<h1>CMYK Decomposer</h1>
-                <p><b>Client_ID: </b>{{client_id}}</p>
+                <p><b>Available formats:</b>
+                {% for f in available_formats %}
+                {{f}}
+                {% endfor %}</p>
 		<form method = "POST" action="" enctype="multipart/form-data">
 			<p><input type="file" name="file" accept="image/*"></p>
 			<p><input type="submit" value="Submit"></p>
@@ -30,12 +33,17 @@
                                       <th>K</th>
                               </tr>
                               <tr>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='C') }}" style="width: 150px"></td>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='M') }}" style="width: 150px"></td>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='Y') }}" style="width: 150px"></td>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='K') }}" style="width: 150px"></td>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='C') }}" style="width: 250px"></td>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='M') }}" style="width: 250px"></td>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='Y') }}" style="width: 250px"></td>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='K') }}" style="width: 250px"></td>
                               </tr>
                       </table>
-	</body>
+        </body>
+        <footer>
+                <hr>
+                <h7><b>   Client_ID: </b>{{client_id}}</h7>
+                <h7><b>Site Version: </b>{{version}}</h7>
+        </footer>
 </html>
 

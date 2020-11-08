@@ -17,7 +17,6 @@ app.config['MAX_SIZE'] = 1024 * 1024
 
 @app.route('/')
 def main_page():
-        print(version.Version())
         client_id = request.cookies.get('client_id')
         if client_id is None:
             # create new uuid
@@ -27,7 +26,7 @@ def main_page():
             resp.set_cookie('client_id',client_id)
             return resp
         else:
-            return render_template('index.html',client_id=client_id)
+            return render_template('index.html',client_id=client_id, available_formats=app.config['UPLOAD_EXT'],version=version.Version())
 
 @app.route('/',methods=['POST'])
 def upload_image():
