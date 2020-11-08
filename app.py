@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 import uuid
 import os
 from pathlib import Path
+import cmyk
 
 app = Flask(__name__)
 
@@ -44,12 +45,23 @@ def upload_image():
         fpn = app.config['UPLOAD_PATH'] + '/' + client_id
         uploaded_file.save( fpn + str('_s') + file_ext)
 
+        # perform CMYK decomposition
+        cmyk.Extract(app.config['UPLOAD_PATH'], client_id, file_ext)
     return redirect(url_for('main_page'))
 
 @app.route('/uploads/<clientid>/<layer>')
 def get_image_s(clientid,layer):
     print(layer)
-    return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_s.jpg'))
+    if layer is 'C':
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_c.jpg'))
+    elif layer is 'M':
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_m.jpg'))
+    elif layer is 'Y':
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_y.jpg'))
+    elif layer is 'K':
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_k.jpg'))
+    else:
+        return send_from_directory(app.config['UPLOAD_PATH'],filename=clientid+str('_s.jpg'))
 
 @app.route('/assert')
 def critical_failure():
