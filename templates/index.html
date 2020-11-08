@@ -16,10 +16,20 @@
                 
                 <hr>
                     {% set client = client_id %}
-                      <img src="{{ url_for('get_image_s',clientid=client,layer='C') }}" style="width: 150px">
-                      <img src="{{ url_for('get_image_s',clientid=client,layer='M') }}" style="width: 150px">
-                      <img src="{{ url_for('get_image_s',clientid=client,layer='Y') }}" style="width: 150px">
-                      <img src="{{ url_for('get_image_s',clientid=client,layer='K') }}" style="width: 150px">
+                      <table>
+                              <tr>
+                                      <th>C</th>
+                                      <th>M</th>
+                                      <th>Y</th>
+                                      <th>K</th>
+                              </tr>
+                              <tr>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='C') }}" style="width: 150px"></td>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='M') }}" style="width: 150px"></td>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='Y') }}" style="width: 150px"></td>
+                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='K') }}" style="width: 150px"></td>
+                              </tr>
+                      </table>
 	</body>
 </html>
 
