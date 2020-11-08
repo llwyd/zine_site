@@ -5,6 +5,7 @@ import uuid
 import os
 from pathlib import Path
 import cmyk
+import version
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ app.config['MAX_SIZE'] = 1024 * 1024
 
 @app.route('/')
 def main_page():
+        print(version.Version())
         client_id = request.cookies.get('client_id')
         if client_id is None:
             # create new uuid
