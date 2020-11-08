@@ -13,7 +13,7 @@ THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 app.config['UPLOAD_EXT'] = ['.jpg', '.png', '.jpeg']
 app.config['UPLOAD_PATH'] = os.path.join(THIS_FOLDER, 'uploads')
-app.config['MAX_SIZE'] = 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 16
 
 @app.route('/')
 def main_page():
