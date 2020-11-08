@@ -31,16 +31,16 @@ def Extract( folder, client_id, ext):
 
     # Colour versions
     c_out_rgb = ImageCms.profileToProfile(c_out, cmyk_icc, rgb_icc, renderingIntent=0, outputMode='RGB')
-    c_out_rgb.save(fp + '_c.jpg','PNG',optimize=False)
+    c_out_rgb.save(fp + '_c.png','PNG',optimize=False)
 
     m_out_rgb = ImageCms.profileToProfile(m_out, cmyk_icc, rgb_icc, renderingIntent=0, outputMode='RGB')
-    m_out_rgb.save(fp + '_m.jpg','PNG',optimize=False)
+    m_out_rgb.save(fp + '_m.png','PNG',optimize=False)
 
     y_out_rgb = ImageCms.profileToProfile(y_out, cmyk_icc, rgb_icc, renderingIntent=0, outputMode='RGB')
-    y_out_rgb.save(fp + '_y.jpg','PNG',optimize=False)
+    y_out_rgb.save(fp + '_y.png','PNG',optimize=False)
 
     k_out_rgb = ImageCms.profileToProfile(k_out, cmyk_icc, rgb_icc, renderingIntent=0, outputMode='RGB')
-    k_out_rgb.save(fp + '_k.jpg','PNG',optimize=False)
+    k_out_rgb.save(fp + '_k.png','PNG',optimize=False)
 
 if (__name__ == '__main__'):
     print("This was the one thing we didn't want to happen")
