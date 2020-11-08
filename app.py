@@ -43,6 +43,7 @@ def upload_image():
     if filename != '':
         file_ext = Path(filename).suffix
         print(file_ext)
+        file_ext = file_ext.lower()
         if file_ext not in app.config['UPLOAD_EXT']:
             abort(400)
         fpn = app.config['UPLOAD_PATH'] + '/' + client_id
