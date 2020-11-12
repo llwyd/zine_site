@@ -13,20 +13,23 @@ THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 app.config['UPLOAD_EXT'] = ['.jpg', '.png', '.jpeg']
 app.config['UPLOAD_PATH'] = os.path.join(THIS_FOLDER, 'uploads')
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 16
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 10
 
 @app.route('/')
 def main_page():
         client_id = request.cookies.get('client_id')
+        image_available = False
         if client_id is None:
             # create new uuid
             client_id = str(uuid.uuid4())
             print("New User")
-            resp = make_response(render_template('index.html',client_id=client_id,version=version.Version()))
+            resp = make_response(render_template('index.html',client_id=client_id,version=version.Version(),image_available=image_available))
             resp.set_cookie('client_id',client_id)
             return resp
         else:
-            return render_template('index.html',client_id=client_id, available_formats=app.config['UPLOAD_EXT'],version=version.Version())
+            if os.path.isfile(os.path.join(app.config['UPLOAD_PATH'],client_id+str('_c.png'))):
+                image_available = True
+            return render_template('index.html',client_id=client_id, available_formats=app.config['UPLOAD_EXT'],version=version.Version(),image_available=image_available)
 
 @app.route('/',methods=['POST'])
 def upload_image():

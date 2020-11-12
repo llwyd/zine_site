@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>CMYK Translator</title>
+		<title>CMYK Decomposer</title>
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,10 +10,17 @@
                         th {
                                 text-align: center;
                         }
+                        h1 {
+                                text-align: center;
+                        }
+                        footer{
+                                text-align: center;
+                        }
                 </style>
         </head>
 	<body>
-		<h1>CMYK Decomposer</h1>
+                <h1>CMYK Decomposer</h1>
+                <p><b>Instructions:</b> Select a file to upload and it will separate the CMYK layers below in high quality PNG.</p>
                 <p><b>Available formats:</b>
                 {% for f in available_formats %}
                 {{f}}
@@ -25,20 +32,24 @@
                 
                 <hr>
                     {% set client = client_id %}
-                      <table>
+                    {% if image_available == True %}
+                      <table style="width:100%">
                               <tr>
                                       <th>C</th>
                                       <th>M</th>
                                       <th>Y</th>
                                       <th>K</th>
                               </tr>
+                              
                               <tr>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='C') }}" style="width: 250px"></td>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='M') }}" style="width: 250px"></td>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='Y') }}" style="width: 250px"></td>
-                                        <td><img src="{{ url_for('get_image_s',clientid=client,layer='K') }}" style="width: 250px"></td>
+                                        <td><a href = {{ url_for('get_image_s',clientid=client,layer='C') }}><img src="{{ url_for('get_image_s',clientid=client,layer='C') }}" style="width: 100%"></a></td>
+                                        <td><a href = {{ url_for('get_image_s',clientid=client,layer='M') }}><img src="{{ url_for('get_image_s',clientid=client,layer='M') }}" style="width: 100%"></a></td>
+                                        <td><a href = {{ url_for('get_image_s',clientid=client,layer='Y') }}><img src="{{ url_for('get_image_s',clientid=client,layer='Y') }}" style="width: 100%"></a></td>
+                                        <td><a href = {{ url_for('get_image_s',clientid=client,layer='K') }}><img src="{{ url_for('get_image_s',clientid=client,layer='K') }}" style="width: 100%"></a></td>
                               </tr>
+                              
                       </table>
+                      {% endif %}
         </body>
         <footer>
                 <hr>
@@ -46,4 +57,3 @@
                 <h7><b>Site Version: </b>{{version}}</h7>
         </footer>
 </html>
-
