@@ -70,3 +70,14 @@ def get_image_s(clientid,layer):
 @app.route('/assert')
 def critical_failure():
     return 'CRITICAL FAILURE :('
+
+
+@app.after_request
+def add_header(response):
+    # Fix bug with chrome not refreshing page after upload
+    # https://stackoverflow.com/questions/13768007/browser-caching-issues-in-flask
+    # (thanks stack overflow :) )
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
+
