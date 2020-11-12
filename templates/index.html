@@ -16,19 +16,40 @@
                         footer{
                                 text-align: center;
                         }
+                        div.uploader
+                        {
+                                display: block;
+                                text-align: center;
+                        }
+                        form
+                        {
+                                display: inline-block;
+                                margin-left: auto;
+                                margin-right: auto;
+                                text-align: left;
+                        }
+                        div.info
+                        {
+                                text-align: center
+                        }
                 </style>
         </head>
 	<body>
                 <h1>CMYK Decomposer</h1>
-                <p><b>Instructions:</b> Select a file to upload and it will separate the CMYK layers below in high quality PNG.</p>
+                <hr>
+                <div class = "info">
                 <p><b>Available formats:</b>
-                {% for f in available_formats %}
-                {{f}}
-                {% endfor %}</p>
-		<form method = "POST" action="" enctype="multipart/form-data">
-			<p><input type="file" name="file" accept="image/*"></p>
-			<p><input type="submit" value="Submit"></p>
-		</form>
+                        {% for f in available_formats %}
+                        {{f}}
+                        {% endfor %}
+                </p>
+                </div>
+                <div class="uploader"> 
+                        <form method = "POST" action="" enctype="multipart/form-data">
+                                <p><input type="file" name="file" accept="image/*"></p>
+                                <p><input type="submit" value="Submit"></p>
+                        </form>
+                </div>
                 
                 <hr>
                     {% set client = client_id %}
@@ -40,7 +61,6 @@
                                       <th>Y</th>
                                       <th>K</th>
                               </tr>
-                              
                               <tr>
                                         <td><a href = {{ url_for('get_image_s',clientid=client,layer='C') }}><img src="{{ url_for('get_image_s',clientid=client,layer='C') }}" style="width: 100%"></a></td>
                                         <td><a href = {{ url_for('get_image_s',clientid=client,layer='M') }}><img src="{{ url_for('get_image_s',clientid=client,layer='M') }}" style="width: 100%"></a></td>
