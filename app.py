@@ -22,7 +22,7 @@ def main_page():
             # create new uuid
             client_id = str(uuid.uuid4())
             print("New User")
-            resp = make_response(render_template('index.html',client_id=client_id))
+            resp = make_response(render_template('index.html',client_id=client_id,version=version.Version()))
             resp.set_cookie('client_id',client_id)
             return resp
         else:

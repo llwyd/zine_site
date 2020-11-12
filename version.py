@@ -1,6 +1,6 @@
 def Version():
     major = 1
-    minor = 5
+    minor = 6
     s = str(major) + "." + str(minor)
     return s
 
