@@ -13,7 +13,7 @@ def Extract( folder, client_id, ext):
     rgb_icc = os.path.join(ICC_PATH, 'AppleRGB.icc')
     cmyk_icc = os.path.join(ICC_PATH, 'USWebCoatedSWOP.icc')
 
-    im = ImageCms.profileToProfile(img, rgb_icc, cmyk_icc, renderingIntent=0, outputMode='CMYK')
+    im = ImageCms.profileToProfile(img, rgb_icc, cmyk_icc, renderingIntent=3, outputMode='CMYK')
     source = im.split()
 
     print("Extracting")
